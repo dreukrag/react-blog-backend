@@ -31,12 +31,15 @@ if (process.env.NODE_ENV === 'development') {
 }
 // Routes
 const blog = require('./routes/blog')
+const auth = require('./routes/auth')
+
 app.get('/api/test', (req, res) => {
     res.json({
         time: Date().toString()
     })
 })
-app.use(blog)
+app.use('/api', blog) //Routes all require /api + whatever is defined in the route itself
+app.use('/api', auth)
 
 // Port
 const port = process.env.PORT || 8000
